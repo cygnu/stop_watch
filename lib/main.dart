@@ -9,6 +9,19 @@ class WatchApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Stop Watch'),
+        ),
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Center(child: Text('00:00:00')),
+          ElevatedButton(
+            child: const Text('Start'),
+            onPressed: () {},
+          )
+        ]),
+      ),
+    );
   }
 }
