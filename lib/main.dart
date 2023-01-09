@@ -17,7 +17,7 @@ class WatchApp extends StatelessWidget {
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Center(child: Text('00:00:00')),
           ElevatedButton(
-            child: const Text('Start'),
+            child: const Icon(Icons.play_arrow),
             onPressed: () {},
           )
         ]),
