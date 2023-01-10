@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const WatchApp());
+  runApp(WatchApp());
 }
 
 class WatchApp extends StatelessWidget {
-  const WatchApp({Key? key}) : super(key: key);
+  WatchApp({Key? key}) : super(key: key);
+  final Stopwatch timer = Stopwatch();
 
   @override
   Widget build(BuildContext context) {
