@@ -22,8 +22,9 @@ class WatchApp extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20.0),
-          ElevatedButton(
-            child: const Icon(Icons.play_arrow),
+          IconButton(
+            icon: const Icon(Icons.play_arrow),
+            color: Colors.blueAccent,
             onPressed: () {},
           )
         ]),
