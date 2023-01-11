@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class TimerModel {}
 
 class TimerNotifier extends StateNotifier<TimerModel> {
-  TimerNotifier(TimerModel state) : super(state);
+  TimerNotifier() : super();
 
   final Stopwatch timer = Stopwatch();
   final dul = const Duration(seconds: 1);

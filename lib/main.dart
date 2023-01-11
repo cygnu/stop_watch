@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'timer.dart';
 
 void main() {
-  runApp(const WatchApp());
+  runApp(
+    const ProviderScope(child: WatchApp()),
+  );
 }
 
 class WatchApp extends StatelessWidget {
@@ -32,3 +37,7 @@ class WatchApp extends StatelessWidget {
     );
   }
 }
+
+final timerProvider = StateNotifierProvider<TimerNotifier, TimerModel>(
+  (ref) => TimerNotifier(),
+);
