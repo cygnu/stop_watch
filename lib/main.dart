@@ -54,3 +54,16 @@ class StartButton extends StatelessWidget {
     );
   }
 }
+
+class PauseButton extends StatelessWidget {
+  const PauseButton({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.pause),
+      onPressed: () {
+        context.read(timerProvider.notifier).pause();
+      },
+    );
+  }
+}
