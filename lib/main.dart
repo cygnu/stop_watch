@@ -41,3 +41,16 @@ class WatchApp extends StatelessWidget {
 final timerProvider = StateNotifierProvider<TimerNotifier, TimerModel>(
   (ref) => TimerNotifier(),
 );
+
+class StartButton extends StatelessWidget {
+  const StartButton({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.play_arrow),
+      onPressed: () {
+        context.read(timerProvider.notifier).start();
+      },
+    );
+  }
+}
