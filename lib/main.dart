@@ -54,6 +54,7 @@ class ButtonsContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(buttonProvider);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (state == ButtonState.initial) ...[
           const StartButton(),
