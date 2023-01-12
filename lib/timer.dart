@@ -33,7 +33,14 @@ class TimerNotifier extends StateNotifier<TimerModel> {
         (timer.elapsed.inSeconds % 60).toString().padLeft(2, '0');
   }
 
-  void start() {}
+  void start() {
+    timer.start();
+    Timer(dul, keepRunning);
+    state = const TimerModel(ButtonState.started);
+  }
 
-  void pause() {}
+  void pause() {
+    timer.stop();
+    state = const TimerModel(ButtonState.initial);
+  }
 }
