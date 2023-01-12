@@ -19,20 +19,18 @@ class WatchApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Stop Watch'),
         ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Center(
-            child: Text(
-              '00:00:00',
-              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.w900),
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          IconButton(
-            icon: const Icon(Icons.play_arrow),
-            color: Colors.blueAccent,
-            onPressed: () {},
-          )
-        ]),
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Center(
+                child: Text(
+                  '00:00:00',
+                  style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.w900),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              ButtonsContainer()
+            ]),
       ),
     );
   }
@@ -41,6 +39,32 @@ class WatchApp extends StatelessWidget {
 final timerProvider = StateNotifierProvider<TimerNotifier, TimerModel>(
   (ref) => TimerNotifier(),
 );
+
+final _buttonState = Provider<ButtonState>((ref) {
+  return ref.watch(timerProvider).buttonState;
+});
+
+final buttonProvider = Provider<ButtonState>((ref) {
+  return ref.watch(_buttonState);
+});
+
+class ButtonsContainer extends HookConsumerWidget {
+  const ButtonsContainer({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(buttonProvider);
+    return Row(
+      children: [
+        if (state == ButtonState.initial) ...[
+          const StartButton(),
+        ],
+        if (state == ButtonState.started) ...[
+          const PauseButton(),
+        ],
+      ],
+    );
+  }
+}
 
 class StartButton extends StatelessWidget {
   const StartButton({Key? key}) : super(key: key);

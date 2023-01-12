@@ -2,6 +2,11 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+enum ButtonState {
+  initial,
+  started,
+}
+
 class TimerModel {}
 
 class TimerNotifier extends StateNotifier<TimerModel> {
