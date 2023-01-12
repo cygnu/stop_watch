@@ -32,4 +32,8 @@ class TimerNotifier extends StateNotifier<TimerModel> {
         ':' +
         (timer.elapsed.inSeconds % 60).toString().padLeft(2, '0');
   }
+
+  void start() {}
+
+  void pause() {}
 }

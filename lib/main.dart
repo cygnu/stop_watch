@@ -66,27 +66,27 @@ class ButtonsContainer extends HookConsumerWidget {
   }
 }
 
-class StartButton extends StatelessWidget {
+class StartButton extends ConsumerWidget {
   const StartButton({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: const Icon(Icons.play_arrow),
       onPressed: () {
-        context.read(timerProvider.notifier).start();
+        ref.read(timerProvider.notifier).start();
       },
     );
   }
 }
 
-class PauseButton extends StatelessWidget {
+class PauseButton extends ConsumerWidget {
   const PauseButton({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: const Icon(Icons.pause),
       onPressed: () {
-        context.read(timerProvider.notifier).pause();
+        ref.read(timerProvider.notifier).pause();
       },
     );
   }
