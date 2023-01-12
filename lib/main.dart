@@ -9,28 +9,32 @@ void main() {
   );
 }
 
-class WatchApp extends StatelessWidget {
+class WatchApp extends HookConsumerWidget {
   const WatchApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timerDisplay = ref.read(timeProvider);
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Stop Watch'),
         ),
         body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Center(
-                child: Text(
-                  '00:00:00',
-                  style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.w900),
-                ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                timerDisplay,
+                style: const TextStyle(
+                    fontSize: 36.0, fontWeight: FontWeight.w900),
               ),
-              SizedBox(height: 20.0),
-              ButtonsContainer()
-            ]),
+            ),
+            const SizedBox(height: 20.0),
+            const ButtonsContainer()
+          ],
+        ),
       ),
     );
   }
