@@ -8,19 +8,20 @@ enum ButtonState {
 }
 
 class TimerModel {
-  const TimerModel(this.buttonState);
+  const TimerModel(this.timerDisplay, this.buttonState);
 
+  final String timerDisplay;
   final ButtonState buttonState;
 }
 
 class TimerNotifier extends StateNotifier<TimerModel> {
   TimerNotifier() : super(_initialState);
 
-  static const _initialState = TimerModel(ButtonState.initial);
+  static final _initialState = TimerModel(timerDisplay, ButtonState.initial);
 
   final Stopwatch timer = Stopwatch();
-  final dul = const Duration(seconds: 1);
-  String timerDisplay = '00:00:00';
+  static const dul = Duration(seconds: 1);
+  static String timerDisplay = '00:00:00';
 
   void keepRunning() {
     if (timer.isRunning) {
@@ -36,11 +37,11 @@ class TimerNotifier extends StateNotifier<TimerModel> {
   void start() {
     timer.start();
     Timer(dul, keepRunning);
-    state = const TimerModel(ButtonState.started);
+    state = TimerModel(state.timerDisplay, ButtonState.started);
   }
 
   void pause() {
     timer.stop();
-    state = const TimerModel(ButtonState.initial);
+    state = TimerModel(state.timerDisplay, ButtonState.initial);
   }
 }
