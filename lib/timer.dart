@@ -7,10 +7,16 @@ enum ButtonState {
   started,
 }
 
-class TimerModel {}
+class TimerModel {
+  const TimerModel(this.buttonState);
+
+  final ButtonState buttonState;
+}
 
 class TimerNotifier extends StateNotifier<TimerModel> {
-  TimerNotifier() : super();
+  TimerNotifier() : super(_initialState);
+
+  static const _initialState = TimerModel(ButtonState.initial);
 
   final Stopwatch timer = Stopwatch();
   final dul = const Duration(seconds: 1);
