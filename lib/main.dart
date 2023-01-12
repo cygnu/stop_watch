@@ -40,6 +40,14 @@ final timerProvider = StateNotifierProvider<TimerNotifier, TimerModel>(
   (ref) => TimerNotifier(),
 );
 
+final _timeProvider = Provider<String>((ref) {
+  return ref.watch(timerProvider).timerDisplay;
+});
+
+final timeProvider = Provider<String>((ref) {
+  return ref.watch(_timeProvider);
+});
+
 final _buttonState = Provider<ButtonState>((ref) {
   return ref.watch(timerProvider).buttonState;
 });
