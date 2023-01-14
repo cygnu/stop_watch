@@ -18,9 +18,9 @@ class TimerNotifier extends StateNotifier<TimerModel> {
   static const dul = Duration(seconds: 1);
   static String timerDisplay = '00:00:00';
 
-  void keepRunning() {
+  void _keepRunning() {
     if (timer.isRunning) {
-      Timer(dul, keepRunning);
+      Timer(dul, _keepRunning);
     }
     timerDisplay = (timer.elapsed.inHours).toString().padLeft(2, '0') +
         ':' +
@@ -31,7 +31,7 @@ class TimerNotifier extends StateNotifier<TimerModel> {
 
   void start() {
     timer.start();
-    Timer(dul, keepRunning);
+    Timer(dul, _keepRunning);
     state = TimerModel(timerDisplay, true);
   }
 
