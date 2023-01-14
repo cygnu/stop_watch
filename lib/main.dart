@@ -9,13 +9,10 @@ void main() {
   );
 }
 
-class WatchApp extends HookConsumerWidget {
+class WatchApp extends StatelessWidget {
   const WatchApp({Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final timerDisplay = ref.read(timeProvider);
-
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -23,16 +20,10 @@ class WatchApp extends HookConsumerWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                timerDisplay,
-                style: const TextStyle(
-                    fontSize: 36.0, fontWeight: FontWeight.w900),
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            const ButtonsContainer()
+          children: const [
+            TimerContainer(),
+            SizedBox(height: 20.0),
+            ButtonsContainer()
           ],
         ),
       ),
@@ -59,6 +50,21 @@ final _buttonState = Provider<ButtonState>((ref) {
 final buttonProvider = Provider<ButtonState>((ref) {
   return ref.watch(_buttonState);
 });
+
+class TimerContainer extends HookConsumerWidget {
+  const TimerContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timerDisplay = ref.watch(timeProvider);
+    return Center(
+      child: Text(
+        timerDisplay,
+        style: const TextStyle(fontSize: 36.0, fontWeight: FontWeight.w900),
+      ),
+    );
+  }
+}
 
 class ButtonsContainer extends HookConsumerWidget {
   const ButtonsContainer({Key? key}) : super(key: key);
