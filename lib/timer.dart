@@ -37,11 +37,11 @@ class TimerNotifier extends StateNotifier<TimerModel> {
   void start() {
     timer.start();
     Timer(dul, keepRunning);
-    state = TimerModel(state.timerDisplay, ButtonState.started);
+    state = TimerModel(timerDisplay, ButtonState.started);
   }
 
   void pause() {
     timer.stop();
-    state = TimerModel(state.timerDisplay, ButtonState.initial);
+    state = TimerModel(timerDisplay, ButtonState.initial);
   }
 }
