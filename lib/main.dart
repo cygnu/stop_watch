@@ -43,20 +43,20 @@ final timeProvider = Provider<String>((ref) {
   return ref.watch(_timeProvider);
 });
 
-final _buttonState = Provider<ButtonState>((ref) {
-  return ref.watch(timerProvider).buttonState;
+final _buttonState = Provider<bool>((ref) {
+  return ref.watch(timerProvider).isRunning;
 });
 
-final buttonProvider = Provider<ButtonState>((ref) {
+final buttonProvider = Provider<bool>((ref) {
   return ref.watch(_buttonState);
 });
 
 class TimerContainer extends HookConsumerWidget {
   const TimerContainer({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timerDisplay = ref.watch(timeProvider);
+    print('building TimerContainer $timerDisplay');
     return Center(
       child: Text(
         timerDisplay,
@@ -70,16 +70,11 @@ class ButtonsContainer extends HookConsumerWidget {
   const ButtonsContainer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(buttonProvider);
+    final isRunning = ref.watch(buttonProvider);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (state == ButtonState.initial) ...[
-          const StartButton(),
-        ],
-        if (state == ButtonState.started) ...[
-          const PauseButton(),
-        ],
+        (isRunning == true) ? const PauseButton() : const StartButton(),
       ],
     );
   }

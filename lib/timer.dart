@@ -2,22 +2,17 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-enum ButtonState {
-  initial,
-  started,
-}
-
 class TimerModel {
-  const TimerModel(this.timerDisplay, this.buttonState);
+  const TimerModel(this.timerDisplay, this.isRunning);
 
   final String timerDisplay;
-  final ButtonState buttonState;
+  final bool isRunning;
 }
 
 class TimerNotifier extends StateNotifier<TimerModel> {
   TimerNotifier() : super(_initialState);
 
-  static final _initialState = TimerModel(timerDisplay, ButtonState.initial);
+  static final _initialState = TimerModel(timerDisplay, false);
 
   final Stopwatch timer = Stopwatch();
   static const dul = Duration(seconds: 1);
@@ -37,11 +32,11 @@ class TimerNotifier extends StateNotifier<TimerModel> {
   void start() {
     timer.start();
     Timer(dul, keepRunning);
-    state = TimerModel(timerDisplay, ButtonState.started);
+    state = TimerModel(timerDisplay, true);
   }
 
   void pause() {
     timer.stop();
-    state = TimerModel(timerDisplay, ButtonState.initial);
+    state = TimerModel(timerDisplay, false);
   }
 }
