@@ -3,16 +3,22 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TimerModel {
-  const TimerModel(this.timerDisplay, this.isRunning);
+  const TimerModel({required this.timerDisplay, required this.isRunning});
 
   final String timerDisplay;
   final bool isRunning;
+
+  TimerModel copyWith({String? timerDisplay, bool? isRunning}) {
+    return TimerModel(
+      timerDisplay: timerDisplay ?? this.timerDisplay,
+      isRunning: isRunning ?? this.isRunning,
+    );
+  }
 }
 
 class TimerNotifier extends StateNotifier<TimerModel> {
-  TimerNotifier() : super(_initialState);
-
-  static final _initialState = TimerModel(timerDisplay, false);
+  TimerNotifier()
+      : super(const TimerModel(timerDisplay: '00:00:00', isRunning: false));
 
   final Stopwatch timer = Stopwatch();
   static const dul = Duration(seconds: 1);
@@ -32,11 +38,11 @@ class TimerNotifier extends StateNotifier<TimerModel> {
   void start() {
     timer.start();
     Timer(dul, _keepRunning);
-    state = TimerModel(timerDisplay, true);
+    state = state.copyWith(timerDisplay: timerDisplay, isRunning: true);
   }
 
   void pause() {
     timer.stop();
-    state = TimerModel(timerDisplay, false);
+    state = state.copyWith(timerDisplay: timerDisplay, isRunning: false);
   }
 }
